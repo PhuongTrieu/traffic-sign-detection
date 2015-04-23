@@ -148,13 +148,14 @@ namespace imageprocessing {
   }
 
   // Function to extract the contour with some denoising step
-  void contours_extraction(const cv::Mat& bin_image, std::vector< std::vector< cv::Point > >& final_contours) {
+  void contours_extraction(const cv::Mat& binImage, std::vector< std::vector< cv::Point > >& final_contours) {
 
     // Allocate the needed element
     std::vector< std::vector< cv::Point > > contours;
     std::vector< cv::Vec4i > hierarchy;
 
     // Extract the raw contours
+    cv::Mat bin_image = binImage.clone();
     cv::findContours(bin_image, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 
     // Need to remove some of the contours based on aspect ratio inconsistancy
